@@ -21,15 +21,15 @@ for i, file in enumerate(txt_files):
 # Concatenate all dataframes
 combined_df = pd.concat(dfs, ignore_index=True)
 
-# Separate the last column
-last_column = combined_df.iloc[:, -1]
-other_columns = combined_df.iloc[:, :-1]
+# Separate the 14th column (index 13)
+text_column = combined_df.iloc[:, 13]
+other_columns = combined_df.drop(columns=combined_df.columns[13])
 
-# Convert all columns except the last one to numeric, if possible, converting non-numeric values to NaN
+# Convert all columns except the 14th one to numeric, if possible, converting non-numeric values to NaN
 other_columns = other_columns.apply(pd.to_numeric, errors='coerce')
 
-# Concatenate the numeric columns with the last text column
-combined_df = pd.concat([other_columns, last_column], axis=1)
+# Concatenate the numeric columns with the 14th text column
+combined_df = pd.concat([other_columns, text_column], axis=1)
 
 # Write the combined dataframe to an Excel file
 combined_df.to_excel("combined.xlsx", index=False)
