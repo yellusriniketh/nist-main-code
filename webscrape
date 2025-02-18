@@ -1,10 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 
-base_url = "https://webbook.nist.gov/cgi/fluid.cgi?Action=Data&Wide=on&ID=C7727379&Type=IsoBar&Digits=5&P={}&THigh=1200&TLow=77&TInc=1&RefState=DEF&TUnit=K&PUnit=bar&DUnit=kg%2Fm3&HUnit=kJ%2Fkg&WUnit=m%2Fs&VisUnit=Pa*s&STUnit=N%2Fm"
-min_temp = 264
-max_temp = 700
-pressures = [0.5] + list(range(1, 350))
+base_url = "https://webbook.nist.gov/cgi/fluid.cgi?Action=Data&Wide=on&ID=C7727379&Type=IsoBar&Digits=5&P={}&THigh={}&TLow={}&TInc=1&RefState=DEF&TUnit=K&PUnit=bar&DUnit=kg%2Fm3&HUnit=kJ%2Fkg&WUnit=m%2Fs&VisUnit=Pa*s&STUnit=N%2Fm"
+min_temp = 77
+max_temp = 1200
+pressures = [0.5] + list(range(1, 351))
 
 for p in pressures:
     combined_content = ""
@@ -27,7 +27,7 @@ for p in pressures:
         else:
             print(f"Failed to retrieve webpage for P={p}, TLow={t_low}, THigh={t_high}. Status code: {response.status_code}")
 
-    filename = f"dodecane_{p}.txt"
+    filename = f"nitrogen_{p}.txt"
     with open(filename, "w", encoding="utf-8") as file:
         file.write(combined_content)
     print(f"Webpage content saved to '{filename}'.")
