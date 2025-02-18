@@ -16,5 +16,5 @@ def extract_data(p):
         print(f"Failed to retrieve the webpage for P={p}. Status code: {response.status_code}")
 
 # Example usage
-pressure_value = 125  # Replace with the desired pressure value
+pressure_value = 700  # Replace with the desired pressure value
 extract_data(pressure_value)
