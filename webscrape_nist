@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 base_url = "https://webbook.nist.gov/cgi/fluid.cgi?Action=Data&Wide=on&ID=C7782447&Type=IsoBar&Digits=5&P={}&THigh={}&TLow={}&TInc=1&RefState=DEF&TUnit=K&PUnit=bar&DUnit=kg%2Fm3&HUnit=kJ%2Fkg&WUnit=m%2Fs&VisUnit=Pa*s&STUnit=N%2Fm"
 
-for p in range(1, 5):
+for p in range(1,200):
     combined_content = ""
     for t_low in range(60, 1200, 600):
         t_high = min(t_low + 599, 1200)
