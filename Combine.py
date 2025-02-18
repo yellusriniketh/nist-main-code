@@ -10,18 +10,26 @@ dfs = []
 # Loop through the text files
 for i, file in enumerate(txt_files):
     if i == 0:
-        # Read the first file and keep the first line
-        df = pd.read_csv(file, delimiter="\t", header=None)
+        # Read the first file and use the first row as the header
+        df = pd.read_csv(file, delimiter="\t")
     else:
-        # Read the remaining files, skipping the first line
+        # Read the remaining files, skipping the first row
         df = pd.read_csv(file, delimiter="\t", header=None, skiprows=1)
+        df.columns = dfs[0].columns  # Set the column names to match the first dataframe
     dfs.append(df)
 
 # Concatenate all dataframes
 combined_df = pd.concat(dfs, ignore_index=True)
 
-# Convert all columns to numeric, if possible, converting non-numeric values to NaN
-combined_df = combined_df.apply(pd.to_numeric, errors='coerce')
+# Separate the last column
+last_column = combined_df.iloc[:, -1]
+other_columns = combined_df.iloc[:, :-1]
+
+# Convert all columns except the last one to numeric, if possible, converting non-numeric values to NaN
+other_columns = other_columns.apply(pd.to_numeric, errors='coerce')
+
+# Concatenate the numeric columns with the last text column
+combined_df = pd.concat([other_columns, last_column], axis=1)
 
 # Write the combined dataframe to an Excel file
-combined_df.to_excel("combined.xlsx", index=False, header=False)
+combined_df.to_excel("combined.xlsx", index=False)
