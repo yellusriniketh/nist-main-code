@@ -14,7 +14,7 @@ for p in range(1,200):
             soup = BeautifulSoup(response.content, 'html.parser')
             html_content = soup.prettify()
 
-            if t_low == 60:
+            if t_low == 264:
                 combined_content += html_content  # Include the whole HTML for the first chunk
             else:
                 # Remove the first line (header) for subsequent chunks
