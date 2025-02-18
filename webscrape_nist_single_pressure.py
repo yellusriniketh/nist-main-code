@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 base_url = "https://webbook.nist.gov/cgi/fluid.cgi?Action=Data&Wide=on&ID=C7782447&Type=IsoBar&Digits=5&P={}&THigh={}&TLow={}&TInc=1&RefState=DEF&TUnit=K&PUnit=bar&DUnit=kg%2Fm3&HUnit=kJ%2Fkg&WUnit=m%2Fs&VisUnit=Pa*s&STUnit=N%2Fm"
 
-pressure_value = 200  # Set your desired pressure value here
+pressure_value = 0.5  # Set your desired pressure value here
 combined_content = ""
 
 for t_low in range(60, 1200, 600):
