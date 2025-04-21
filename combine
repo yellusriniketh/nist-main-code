@@ -8,7 +8,7 @@ def extract_number(filename):
     return int(match.group(0)) if match else 0
 
 # Get a list of all text files in the directory and sort them numerically
-txt_files = sorted(glob.glob("helium_*.txt"), key=extract_number)
+txt_files = sorted(glob.glob("methane_*.txt"), key=extract_number)
 
 # Initialize an empty list to hold dataframes
 dfs = []
@@ -38,4 +38,4 @@ other_columns = other_columns.apply(pd.to_numeric, errors='coerce')
 combined_df = pd.concat([other_columns, text_column], axis=1)
 
 # Write the combined dataframe to an Excel file
-combined_df.to_excel("helium.xlsx", index=False)
+combined_df.to_excel("methane.xlsx", index=False)
